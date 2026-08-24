@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Literary Magazine</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #e5ebef;
+            color: #263b4a;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: #223b52;
+            min-height: 70px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+        }
+
+        .links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+
+            padding-bottom: 7px;
+
+            border-bottom: 2px solid transparent;
+
+            transition: 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #f1df91;
+        }
+
+        /* ACTIVE TAB */
+
+        .links a.active {
+            color: #f1df91;
+            border-bottom: 2px solid #f1df91;
+        }
+
+
+        /* =========================
+           HOVER DESCRIPTIONS
+        ========================= */
+
+        .tooltip {
+
+            position: absolute;
+
+            top: 42px;
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                translateY(-5px);
+
+            background: #f5eec9;
+
+            color: #223b52;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 5px 15px
+                rgba(34, 59, 82, 0.15);
+
+            z-index: 200;
+        }
+
+        .nav-item:hover .tooltip {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 680px;
+
+            padding: 100px 10%;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #a9c4d7 0%,
+                    #c8d6df 45%,
+                    #e5dfb5 100%
+                );
+        }
+
+        .hero-content {
+            max-width: 850px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .hero-small {
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            color: #526a79;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+        }
+
+        .hero h1 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: clamp(70px, 11vw, 140px);
+
+            line-height: 0.82;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            margin: 28px 0;
+        }
+
+        .hero h1 em {
+
+            color: #536d7d;
+
+            font-style: italic;
+        }
+
+        .hero-rule {
+
+            width: 190px;
+
+            height: 3px;
+
+            background: #d0b849;
+
+            margin: 30px 0;
+        }
+
+        .hero-description {
+
+            max-width: 600px;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 17px;
+
+            font-weight: 300;
+
+            line-height: 1.8;
+
+            color: #405968;
+        }
+
+
+        /* =========================
+           HERO DECORATION
+        ========================= */
+
+        .shape-one {
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border: 1px solid rgba(34, 59, 82, 0.25);
+
+            border-radius: 50%;
+
+            right: 7%;
+            top: 15%;
+
+            transition: 0.6s ease;
+        }
+
+        .shape-two {
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            background: rgba(255, 255, 255, 0.28);
+
+            border-radius: 50%;
+
+            right: 13%;
+            top: 27%;
+
+            transition: 0.6s ease;
+        }
+
+        .hero:hover .shape-one {
+
+            transform:
+                rotate(20deg)
+                scale(1.08);
+        }
+
+        .hero:hover .shape-two {
+
+            transform:
+                translate(-15px, 15px);
+        }
+
+
+        /* =========================
+           EDITOR'S NOTE
+        ========================= */
+
+        .editors-note {
+
+            max-width: 1050px;
+
+            margin: 100px auto;
+
+            padding: 0 30px;
+        }
+
+        .note-layout {
+
+            display: grid;
+
+            grid-template-columns: 220px 1fr;
+
+            gap: 60px;
+        }
+
+        .note-label {
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            color: #738692;
+
+            padding-top: 10px;
+
+            font-weight: 600;
+        }
+
+        .note-content h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 48px;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            line-height: 1.1;
+
+            margin: 0 0 25px;
+        }
+
+        .note-content p {
+
+            font-family: 'Poppins', sans-serif;
+
+            color: #566c7a;
+
+            line-height: 1.9;
+
+            max-width: 720px;
+
+            font-size: 14px;
+
+            font-weight: 300;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           FEATURED WORK
+        ========================= */
+
+        .featured {
+
+            background: #f8f9f9;
+
+            padding: 100px 10%;
+
+            border-top: 1px solid #c9d2d8;
+
+            border-bottom: 1px solid #c9d2d8;
+        }
+
+        .featured-label {
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            color: #778b98;
+
+            font-weight: 600;
+        }
+
+        .featured h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: clamp(48px, 7vw, 80px);
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            max-width: 850px;
+
+            line-height: 1;
+
+            margin: 20px 0;
+        }
+
+        .featured-description {
+
+            max-width: 650px;
+
+            font-family: 'Poppins', sans-serif;
+
+            color: #5d717e;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+            font-weight: 300;
+        }
+
+        .read {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 13px 25px;
+
+            border: 1px solid #223b52;
+
+            color: #223b52;
+
+            text-decoration: none;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .read:hover {
+
+            background: #223b52;
+
+            color: white;
+
+            transform: translateX(8px);
+        }
+
+
+        /* =========================
+           CONTENTS
+        ========================= */
+
+        .contents {
+
+            padding: 100px 10%;
+
+            background: #d5e0e7;
+        }
+
+        .contents h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 50px;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            margin-bottom: 50px;
+        }
+
+        .contents-list {
+
+            max-width: 1100px;
+
+            border-top: 1px solid #899ca8;
+        }
+
+        .content-item {
+
+            display: grid;
+
+            grid-template-columns: 100px 1fr 30px;
+
+            align-items: center;
+
+            padding: 28px 10px;
+
+            border-bottom: 1px solid #899ca8;
+
+            text-decoration: none;
+
+            color: #223b52;
+
+            transition: 0.3s ease;
+        }
+
+        .content-item:hover {
+
+            background: #f5eec9;
+
+            padding-left: 25px;
+        }
+
+        .content-number {
+
+            font-family: 'Poppins', sans-serif;
+
+            color: #8a9aa4;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .content-name {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 28px;
+
+            font-weight: 400;
+        }
+
+        .arrow {
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 20px;
+
+            transition: 0.3s;
+        }
+
+        .content-item:hover .arrow {
+
+            transform: translateX(6px);
+        }
+
+
+        /* =========================
+           TEAM
+        ========================= */
+
+        .team {
+
+            padding: 110px 10%;
+
+            background: #f4f6f7;
+        }
+
+        .team-heading {
+
+            max-width: 650px;
+
+            margin-bottom: 50px;
+        }
+
+        .team-heading small {
+
+            font-family: 'Poppins', sans-serif;
+
+            letter-spacing: 3px;
+
+            font-size: 10px;
+
+            color: #7a8b96;
+
+            font-weight: 600;
+        }
+
+        .team-heading h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 52px;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            margin: 15px 0;
+        }
+
+        .team-heading p {
+
+            font-family: 'Poppins', sans-serif;
+
+            color: #657984;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           TEAM MEMBERS
+        ========================= */
+
+        .team-grid {
+
+            max-width: 1050px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .member {
+
+            background: white;
+
+            min-height: 145px;
+
+            padding: 28px;
+
+            border: 1px solid #cbd4d9;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .member::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+
+            height: 90px;
+
+            background: #f1e6ae;
+
+            border-radius: 50%;
+
+            right: -35px;
+
+            bottom: -35px;
+
+            transition: 0.35s ease;
+        }
+
+        .member:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 12px 25px rgba(34, 59, 82, 0.12);
+        }
+
+        .member:hover::after {
+
+            width: 125px;
+
+            height: 125px;
+        }
+
+        .member-name {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 27px;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .member-role {
+
+            margin-top: 10px;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #738591;
+
+            position: relative;
+
+            z-index: 2;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           FINAL MESSAGE
+        ========================= */
+
+        .final-message {
+
+            background: #223b52;
+
+            color: white;
+
+            padding: 100px 30px;
+
+            text-align: center;
+        }
+
+        .final-message h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 50px;
+
+            font-weight: 400;
+
+            margin: 0 0 20px;
+        }
+
+        .final-message p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            font-family: 'Poppins', sans-serif;
+
+            color: #c7d2d9;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #182b3b;
+
+            color: #9aaab4;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            nav {
+
+                padding: 18px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .links {
+
+                gap: 14px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .tooltip {
+
+                display: none;
+            }
+
+            .hero {
+
+                padding: 80px 25px;
+
+                min-height: 600px;
+            }
+
+            .hero h1 {
+
+                font-size: clamp(65px, 18vw, 100px);
+            }
+
+            .shape-one,
+            .shape-two {
+
+                opacity: 0.3;
+            }
+
+            .note-layout {
+
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+            }
+
+            .note-content h2 {
+
+                font-size: 40px;
+            }
+
+            .team-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .content-item {
+
+                grid-template-columns: 55px 1fr 20px;
+            }
+
+            .content-name {
+
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Literary Magazine
+        </div>
+
+
+        <div class="links">
+
+
+            <!-- HOME -->
+
+            <div class="nav-item">
+
+                <a href="index.html" class="active">
+                    Home
+                </a>
+
+                <span class="tooltip">
+                    Welcome Page
+                </span>
+
+            </div>
+
+
+            <!-- ENGLISH -->
+
+            <div class="nav-item">
+
+                <a href="english.html">
+                    English
+                </a>
+
+                <span class="tooltip">
+                    Original Multimodal One-Act Play
+                </span>
+
+            </div>
+
+
+            <!-- CLVED -->
+
+            <div class="nav-item">
+
+                <a href="clved.html">
+                    CLVED
+                </a>
+
+                <span class="tooltip">
+                    Christian Reflection
+                </span>
+
+            </div>
+
+
+            <!-- FILIPINO -->
+
+            <div class="nav-item">
+
+                <a href="filipino.html">
+                    Filipino
+                </a>
+
+                <span class="tooltip">
+                    Literary Analysis
+                </span>
+
+            </div>
+
+
+            <!-- REFERENCES -->
+
+            <div class="nav-item">
+
+                <a href="references.html">
+                    References
+                </a>
+
+                <span class="tooltip">
+                    Sources & Acknowledgments
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO / HOME
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                Student Digital Literary Publication
+            </div>
+
+
+            <h1>
+                Literary<br>
+                <em>Magazine</em>
+            </h1>
+
+
+            <div class="hero-rule"></div>
+
+
+            <p class="hero-description">
+
+                A collection of student voices exploring
+                experiences, choices, and perspectives
+                through literature.
+
+            </p>
+
+        </div>
+
+
+        <div class="shape-one"></div>
+
+        <div class="shape-two"></div>
+
+    </section>
+
+
+
+    <!-- =========================
+         EDITOR'S NOTE
+    ========================= -->
+
+    <section class="editors-note">
+
+        <div class="note-layout">
+
+            <div class="note-label">
+                EDITOR'S NOTE
+            </div>
+
+
+            <div class="note-content">
+
+                <h2>
+                    Stories help us see
+                    beyond ourselves.
+                </h2>
+
+
+                <p>
+
+                    Welcome to our Literary Magazine,
+                    a student-created digital publication
+                    that brings together literature,
+                    reflection, analysis, and creativity.
+
+                </p>
+
+
+                <p>
+
+                    Our work explores meaningful human
+                    experiences and social realities while
+                    encouraging readers to think about
+                    empathy, human dignity, responsibility,
+                    and the way we treat others.
+
+                </p>
+
+
+                <p>
+
+                    We hope that as you explore each section,
+                    you will not only read the words on the
+                    screen but also reflect on the ideas
+                    behind them.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FEATURED WORK
+    ========================= -->
+
+    <section class="featured">
+
+        <div class="featured-label">
+            FEATURED LITERARY WORK
+        </div>
+
+
+        <h2>
+            The Seat We Left Empty
+        </h2>
+
+
+        <p class="featured-description">
+
+            An original multimodal one-act play exploring
+            discrimination, prejudice, wrong judgment,
+            empathy, and human dignity.
+
+        </p>
+
+
+        <a
+            href="english.html"
+            class="read"
+        >
+
+            Read the One-Act Play →
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================
+         MAGAZINE CONTENT
+    ========================= -->
+
+    <section class="contents">
+
+        <h2>
+            Explore the Magazine
+        </h2>
+
+
+        <div class="contents-list">
+
+
+            <a
+                href="english.html"
+                class="content-item"
+            >
+
+                <span class="content-number">
+                    01
+                </span>
+
+                <span class="content-name">
+                    English
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="clved.html"
+                class="content-item"
+            >
+
+                <span class="content-number">
+                    02
+                </span>
+
+                <span class="content-name">
+                    CLVED
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="filipino.html"
+                class="content-item"
+            >
+
+                <span class="content-number">
+                    03
+                </span>
+
+                <span class="content-name">
+                    Filipino
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="references.html"
+                class="content-item"
+            >
+
+                <span class="content-number">
+                    04
+                </span>
+
+                <span class="content-name">
+                    References
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT THE AUTHORS
+    ========================= -->
+
+    <section class="team">
+
+        <div class="team-heading">
+
+            <small>
+                ABOUT THE AUTHORS
+            </small>
+
+
+            <h2>
+                Created Together.
+            </h2>
+
+
+            <p>
+
+                Our publication is a collaborative work
+                combining storytelling, literary analysis,
+                reflection, and web development.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="team-grid">
+
+
+            <div class="member">
+
+                <div class="member-name">
+                    Ashanti Curada
+                </div>
+
+                <div class="member-role">
+                    Website Developer
+                </div>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <div class="member-name">
+                    Jed Molina
+                </div>
+
+                <div class="member-role">
+                    Playwright
+                </div>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <div class="member-name">
+                    Marc Yabut
+                </div>
+
+                <div class="member-role">
+                    Literary Analyst
+                </div>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <div class="member-name">
+                    Ruslan Pardillo
+                </div>
+
+                <div class="member-role">
+                    Reflection Writer
+                </div>
+
+            </div>
+
+
+
+            <div class="member">
+
+                <div class="member-name">
+                    Carl Seniel
+                </div>
+
+                <div class="member-role">
+                    Reflection Writer
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CLOSING MESSAGE
+    ========================= -->
+
+    <section class="final-message">
+
+        <h2>
+            Read. Reflect. Listen.
+        </h2>
+
+
+        <p>
+
+            May every story we encounter encourage
+            us to question our assumptions, understand
+            others, and make room for every voice.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        Literary Magazine • 2026
+
+    </footer>
+
+
+</body>
+
+</html>

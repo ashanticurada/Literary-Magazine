@@ -1,0 +1,3806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Seat We Left Empty | Literary Magazine</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #e9eef1;
+            color: #263b4a;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: #223b52;
+            min-height: 70px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 22px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            padding-bottom: 7px;
+
+            border-bottom: 2px solid transparent;
+
+            transition: 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #f1df91;
+        }
+
+        .links a.active {
+            color: #f1df91;
+
+            border-bottom: 2px solid #f1df91;
+        }
+
+        /* HOVER DESCRIPTION */
+
+        .tooltip {
+            position: absolute;
+
+            top: 42px;
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                translateY(-5px);
+
+            background: #f5eec9;
+
+            color: #223b52;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            font-size: 11px;
+            font-weight: 500;
+
+            white-space: nowrap;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 5px 15px
+                rgba(34, 59, 82, 0.15);
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .play-hero {
+
+            min-height: 650px;
+
+            padding: 100px 10%;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    #9fbacc 0%,
+                    #c4d3dc 48%,
+                    #e7dfb5 100%
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .eyebrow {
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: #526a79;
+
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .play-hero h1 {
+
+            margin: 0;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: clamp(65px, 10vw, 125px);
+
+            line-height: 0.86;
+
+            font-weight: 400;
+
+            color: #223b52;
+        }
+
+        .play-hero h1 em {
+
+            color: #536d7d;
+
+            font-style: italic;
+        }
+
+        .hero-line {
+
+            width: 180px;
+
+            height: 3px;
+
+            background: #d0b849;
+
+            margin: 35px 0;
+        }
+
+        .subtitle {
+
+            font-size: 18px;
+
+            color: #405968;
+
+            font-weight: 300;
+
+            margin-bottom: 35px;
+        }
+
+        .meta {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .meta span {
+
+            background: rgba(255,255,255,0.45);
+
+            border: 1px solid rgba(34,59,82,0.18);
+
+            padding: 9px 14px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
+            color: #405968;
+
+            font-weight: 500;
+        }
+
+
+        /* DECORATION */
+
+        .chair {
+
+            position: absolute;
+
+            right: 12%;
+
+            bottom: 70px;
+
+            width: 130px;
+
+            height: 190px;
+
+            opacity: 0.22;
+
+            transition: 0.7s ease;
+        }
+
+        .chair-back {
+
+            width: 90px;
+
+            height: 110px;
+
+            border: 7px solid #223b52;
+
+            border-bottom: none;
+
+            margin: auto;
+        }
+
+        .chair-seat {
+
+            width: 125px;
+
+            height: 20px;
+
+            background: #223b52;
+
+            margin-left: 3px;
+        }
+
+        .chair-leg {
+
+            width: 7px;
+
+            height: 75px;
+
+            background: #223b52;
+
+            display: inline-block;
+
+            margin-left: 25px;
+        }
+
+        .chair-leg.right {
+
+            margin-left: 55px;
+        }
+
+        .play-hero:hover .chair {
+
+            transform:
+                translateY(-15px)
+                rotate(-3deg);
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro {
+
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+            padding: 90px 30px;
+        }
+
+        .intro-grid {
+
+            display: grid;
+
+            grid-template-columns: 210px 1fr;
+
+            gap: 60px;
+        }
+
+        .intro-label {
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            color: #788b96;
+
+            font-weight: 600;
+        }
+
+        .intro h2 {
+
+            margin: 0 0 25px;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 48px;
+
+            line-height: 1.1;
+
+            font-weight: 400;
+
+            color: #223b52;
+        }
+
+        .intro p {
+
+            max-width: 700px;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            font-weight: 300;
+
+            color: #566c7a;
+        }
+
+
+        /* =========================
+           CHARACTERS
+        ========================= */
+
+        .characters {
+
+            background: #f6f8f8;
+
+            padding: 100px 10%;
+
+            border-top: 1px solid #cbd5da;
+
+            border-bottom: 1px solid #cbd5da;
+        }
+
+        .section-label {
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            color: #788b96;
+
+            font-weight: 600;
+        }
+
+        .characters h2 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 58px;
+
+            font-weight: 400;
+
+            color: #223b52;
+
+            margin: 15px 0 45px;
+        }
+
+        .character-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+
+            max-width: 1100px;
+        }
+
+        .character {
+
+            background: white;
+
+            border: 1px solid #ccd6db;
+
+            padding: 28px;
+
+            min-height: 180px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: 0.35s ease;
+        }
+
+        .character::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+
+            height: 90px;
+
+            border-radius: 50%;
+
+            background: #f1e6ae;
+
+            right: -30px;
+
+            bottom: -30px;
+
+            transition: 0.4s ease;
+        }
+
+        .character:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(34,59,82,0.12);
+        }
+
+        .character:hover::before {
+
+            width: 130px;
+            height: 130px;
+        }
+
+        .character h3 {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin: 0;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 27px;
+
+            font-weight: 400;
+
+            color: #223b52;
+        }
+
+        .character-role {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin: 7px 0 14px;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            color: #788b96;
+
+            font-weight: 600;
+        }
+
+        .character p {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin: 0;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            color: #607580;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           PLAY NAVIGATION
+        ========================= */
+
+        .scene-menu {
+
+            padding: 80px 10%;
+
+            background: #d5e0e7;
+        }
+
+        .scene-menu h2 {
+
+            margin: 0 0 35px;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 48px;
+
+            font-weight: 400;
+
+            color: #223b52;
+        }
+
+        .scene-links {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .scene-links a {
+
+            text-decoration: none;
+
+            color: #223b52;
+
+            border: 1px solid #879ba7;
+
+            padding: 12px 18px;
+
+            font-size: 12px;
+
+            font-weight: 500;
+
+            transition: 0.3s ease;
+
+            background: rgba(255,255,255,0.3);
+        }
+
+        .scene-links a:hover {
+
+            background: #223b52;
+
+            color: white;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           PLAY
+        ========================= */
+
+        .play {
+
+            padding: 100px 10%;
+
+            background: #edf1f3;
+        }
+
+        .play-inner {
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+
+        /* SCENE */
+
+        .scene {
+
+            margin-bottom: 110px;
+
+            scroll-margin-top: 100px;
+        }
+
+        .scene-heading {
+
+            display: flex;
+
+            align-items: baseline;
+
+            gap: 20px;
+
+            border-bottom: 1px solid #aab9c1;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 35px;
+        }
+
+        .scene-number {
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            color: #8a9aa4;
+
+            font-weight: 600;
+        }
+
+        .scene h2 {
+
+            margin: 0;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 45px;
+
+            font-weight: 400;
+
+            color: #223b52;
+        }
+
+
+        /* PROLOGUE */
+
+        .prologue {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #223b52,
+                    #526d7d
+                );
+
+            color: white;
+
+            padding: 45px;
+
+            margin-bottom: 45px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .prologue::after {
+
+            content: "EMPTY";
+
+            position: absolute;
+
+            right: -15px;
+
+            bottom: -35px;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 100px;
+
+            color: rgba(255,255,255,0.05);
+        }
+
+        .prologue h3 {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 32px;
+
+            font-weight: 400;
+
+            margin-top: 0;
+        }
+
+        .prologue p {
+
+            color: #dce5e9;
+
+            line-height: 1.9;
+
+            font-size: 14px;
+
+            font-weight: 300;
+
+        }
+
+
+        /* STAGE DIRECTIONS */
+
+        .stage {
+
+            background: #f5eec9;
+
+            border-left: 4px solid #d0b849;
+
+            padding: 17px 20px;
+
+            margin: 25px 0;
+
+            color: #536570;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            font-style: italic;
+        }
+
+
+        /* DIALOGUE */
+
+        .dialogue {
+
+            margin: 25px 0;
+
+            padding-left: 20px;
+
+            border-left: 2px solid #b9c6cc;
+        }
+
+        .speaker {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 20px;
+
+            color: #223b52;
+
+            margin-bottom: 5px;
+        }
+
+        .line {
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            color: #526975;
+
+            font-weight: 300;
+
+        }
+
+        .line em {
+
+            color: #788b96;
+        }
+
+
+        /* PROJECTION */
+
+        .projection {
+
+            margin: 35px 0;
+
+            padding: 35px 25px;
+
+            text-align: center;
+
+            background: #223b52;
+
+            color: white;
+
+            border: 1px solid #526d7d;
+
+        }
+
+        .projection span {
+
+            display: block;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #d9c978;
+
+            margin-bottom: 15px;
+
+            font-weight: 600;
+        }
+
+        .projection strong {
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 28px;
+
+            font-weight: 400;
+
+        }
+
+
+        /* IMAGE PLACEHOLDER */
+
+        .visual {
+
+            min-height: 170px;
+
+            margin: 30px 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c5d4dd,
+                    #e8e1b9
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border: 1px solid #bac8cf;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .visual::before {
+
+            content: "";
+
+            width: 120px;
+
+            height: 120px;
+
+            border: 1px solid rgba(34,59,82,0.3);
+
+            border-radius: 50%;
+
+            position: absolute;
+        }
+
+        .visual-text {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #405968;
+
+            font-weight: 600;
+        }
+
+
+        /* KEY LINE */
+
+        .key-line {
+
+            margin: 35px 0;
+
+            padding: 30px;
+
+            background: white;
+
+            border-left: 4px solid #223b52;
+
+        }
+
+        .key-line p {
+
+            margin: 0;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 25px;
+
+            line-height: 1.4;
+
+            color: #223b52;
+        }
+
+
+        /* =========================
+           ENDING
+        ========================= */
+
+        .ending {
+
+            background: #223b52;
+
+            color: white;
+
+            padding: 100px 10%;
+
+            text-align: center;
+        }
+
+        .ending h2 {
+
+            margin: 0 0 25px;
+
+            font-family: 'DM Serif Display', serif;
+
+            font-size: 55px;
+
+            font-weight: 400;
+        }
+
+        .ending p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #cbd8de;
+
+            line-height: 1.9;
+
+            font-size: 14px;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #182b3b;
+
+            color: #9aaab4;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 11px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            nav {
+
+                padding: 18px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .links {
+
+                gap: 14px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .tooltip {
+
+                display: none;
+            }
+
+            .play-hero {
+
+                padding: 80px 25px;
+
+                min-height: 600px;
+            }
+
+            .chair {
+
+                right: 2%;
+
+                opacity: 0.12;
+
+                transform: scale(0.7);
+            }
+
+            .intro-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+            }
+
+            .character-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .characters,
+            .scene-menu,
+            .play {
+
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .scene-heading {
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+            .scene h2 {
+
+                font-size: 38px;
+            }
+
+            .prologue {
+
+                padding: 30px 22px;
+            }
+
+            .dialogue {
+
+                padding-left: 14px;
+            }
+
+            .ending {
+
+                padding: 80px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            Literary Magazine
+        </div>
+
+
+        <div class="links">
+
+            <div class="nav-item">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <span class="tooltip">
+                    Welcome Page
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="english.html" class="active">
+                    English
+                </a>
+
+                <span class="tooltip">
+                    Original Multimodal One-Act Play
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="clved.html">
+                    CLVED
+                </a>
+
+                <span class="tooltip">
+                    Christian Reflection
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="filipino.html">
+                    Filipino
+                </a>
+
+                <span class="tooltip">
+                    Literary Analysis
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="references.html">
+                    References
+                </a>
+
+                <span class="tooltip">
+                    Sources & Acknowledgments
+                </span>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="play-hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                An Original Multimodal One-Act Play
+            </div>
+
+
+            <h1>
+                The Seat<br>
+                <em>We Left Empty</em>
+            </h1>
+
+
+            <div class="hero-line"></div>
+
+
+            <p class="subtitle">
+                A Social Drama
+            </p>
+
+
+            <div class="meta">
+
+                <span>
+                    Discrimination
+                </span>
+
+                <span>
+                    Prejudice
+                </span>
+
+                <span>
+                    Empathy
+                </span>
+
+                <span>
+                    Human Dignity
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DECORATIVE CHAIR -->
+
+        <div class="chair">
+
+            <div class="chair-back"></div>
+
+            <div class="chair-seat"></div>
+
+            <div class="chair-leg"></div>
+
+            <div class="chair-leg right"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PLAY INFORMATION
+    ========================= -->
+
+    <section class="intro">
+
+        <div class="intro-grid">
+
+            <div class="intro-label">
+                THE PLAY
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Before we judge a story,
+                    should we hear it first?
+                </h2>
+
+
+                <p>
+                    Set in a public high school classroom
+                    in the Philippines, this one-act play
+                    follows a new student and the assumptions
+                    made about her before her classmates
+                    take the time to understand her.
+                </p>
+
+
+                <p>
+                    Through five scenes, the story explores
+                    how ordinary assumptions can lead to
+                    exclusion—and how listening, empathy,
+                    and the willingness to change can make
+                    room for someone who was once left out.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CHARACTERS
+    ========================= -->
+
+    <section class="characters">
+
+        <div class="section-label">
+            CHARACTERS
+        </div>
+
+
+        <h2>
+            The People in the Story
+        </h2>
+
+
+        <div class="character-grid">
+
+
+            <div class="character">
+
+                <h3>
+                    Maya Garcia
+                </h3>
+
+                <div class="character-role">
+                    New Student
+                </div>
+
+                <p>
+                    A quiet, intelligent, and hardworking
+                    student who recently transferred to the
+                    school. She comes from a financially
+                    struggling family but does not want
+                    others to pity her.
+                </p>
+
+            </div>
+
+
+
+            <div class="character">
+
+                <h3>
+                    Eli San Juan
+                </h3>
+
+                <div class="character-role">
+                    Student
+                </div>
+
+                <p>
+                    A confident student who is quick to
+                    judge people based on appearances.
+                    He is not intentionally cruel, but he
+                    has grown accustomed to making assumptions.
+                </p>
+
+            </div>
+
+
+
+            <div class="character">
+
+                <h3>
+                    Sam Castro
+                </h3>
+
+                <div class="character-role">
+                    Student
+                </div>
+
+                <p>
+                    Eli's close friend. More thoughtful than
+                    Eli, but often remains silent when
+                    something feels wrong.
+                </p>
+
+            </div>
+
+
+
+            <div class="character">
+
+                <h3>
+                    Ana Flores
+                </h3>
+
+                <div class="character-role">
+                    Student
+                </div>
+
+                <p>
+                    An empathetic student who believes that
+                    people should be understood before they
+                    are judged.
+                </p>
+
+            </div>
+
+
+
+            <div class="character">
+
+                <h3>
+                    Mr. Cruz
+                </h3>
+
+                <div class="character-role">
+                    Teacher
+                </div>
+
+                <p>
+                    A calm and observant teacher who
+                    encourages his students to question
+                    their assumptions.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCENE MENU
+    ========================= -->
+
+    <section class="scene-menu">
+
+        <h2>
+            Enter the Play
+        </h2>
+
+
+        <div class="scene-links">
+
+            <a href="#prologue">
+                Prologue
+            </a>
+
+            <a href="#scene1">
+                Scene 1
+            </a>
+
+            <a href="#scene2">
+                Scene 2
+            </a>
+
+            <a href="#scene3">
+                Scene 3
+            </a>
+
+            <a href="#scene4">
+                Scene 4
+            </a>
+
+            <a href="#scene5">
+                Scene 5
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PLAY
+    ========================= -->
+
+    <main class="play">
+
+        <div class="play-inner">
+
+
+            <!-- =====================
+                 PROLOGUE
+            ===================== -->
+
+            <section class="scene" id="prologue">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        PROLOGUE
+                    </span>
+
+                    <h2>
+                        The Empty Seat
+                    </h2>
+
+                </div>
+
+
+                <div class="prologue">
+
+                    <h3>
+                        THE EMPTY SEAT
+                    </h3>
+
+                    <p>
+                        The stage is dark. One chair is
+                        illuminated by a single spotlight.
+                        A school bell rings.
+                    </p>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The stage is dark. One chair is
+                    illuminated by a single spotlight.
+                    A school bell rings.]
+
+                </div>
+
+
+                <div class="projection">
+
+                    <span>
+                        Projection
+                    </span>
+
+                    <strong>
+                        “WHAT DO YOU SEE BEFORE YOU SEE A PERSON?”
+                    </strong>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Lights slowly rise.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Every classroom has a seat.
+                        Sometimes, that seat belongs to
+                        the smartest student. Sometimes,
+                        it belongs to the funniest.
+                        Sometimes, it belongs to someone
+                        who hardly speaks at all.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        But what happens when we decide
+                        what a person is like before we
+                        ever hear their story?
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Blackout.]
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 SCENE 1
+            ===================== -->
+
+            <section class="scene" id="scene1">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        SCENE 1
+                    </span>
+
+                    <h2>
+                        The New Student
+                    </h2>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Lights up. A classroom. Students are
+                    talking before class. MAYA GARCIA enters
+                    quietly, carrying an old school bag.
+                    She looks around for a seat.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Hi! Are you new here?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Yes. Hello, nice to meet you,
+                        I’m Maya!
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Nice to meet you too, I'm Ana!
+                        You can sit here.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Ana points toward an empty seat.
+                    Maya smiles and sits.]
+
+                </div>
+
+
+                <div class="visual">
+
+                    <div class="visual-text">
+                        Visual Element — Empty Classroom Seat
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Are you sure that’s the new student?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Yeah.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        She doesn’t look like she came
+                        from our school.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        What does that even mean?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I don’t know. She just… doesn’t
+                        fit in.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya hears them but pretends not to.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Maya, don’t mind them.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        <em>No,</em> it’s okay. I don’t
+                        really mind, heh.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Are you sure you're okay with it?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Don’t you worry, I’m used to it.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Ana looks concerned.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Hey, Maya. Can I ask you a question?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Yes, of course.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Did you transfer from one of those
+                        small schools in the province?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Yes po, why did you ask?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I knew it.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Hmm, know what?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Oh, nothing po.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Mr. Cruz enters.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Good morning, class.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Everyone stands up and bows their head.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        CLASS
+                    </div>
+
+                    <div class="line">
+                        Good morning, Sir!
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        We have a new classmate today.
+                        Maya, would you like to introduce
+                        yourself?
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya stands.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Good morning everyone, I’m Maya.
+                        I transferred here because my
+                        family moved. I hope we can get
+                        along and make new moments together!
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Welcome, Maya.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya sits.]
+
+                </div>
+
+
+                <div class="visual">
+
+                    <div class="visual-text">
+                        Visual Element — Classroom
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        <em>(quietly to Sam)</em>
+                        She seems really nonchalant.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Maybe she’s just nervous because
+                        it is her first day here.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Or maybe she thinks she’s better
+                        than us.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        How’d you think about that from
+                        only one sentence she spoke?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I’m just following my intuitions,
+                        you know?
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The classroom bell rings.]
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 SCENE 2
+            ===================== -->
+
+            <section class="scene" id="scene2">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        SCENE 2
+                    </span>
+
+                    <h2>
+                        The Assumption
+                    </h2>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The following week. Students are
+                    preparing for a group presentation.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Your task is to create a presentation
+                        about equality and inclusion. I will
+                        divide you into groups.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Are you kidding me right now?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        What’s the matter?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Just nothing..
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        I can help work on the research.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Hey, Maya. Maybe you can just do
+                        the easy part.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Uhm, excuse me. What do you mean?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        You’re just a newbie. You might not
+                        know how things work here.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        She can decide what part she wants
+                        to do. She has the free will to decide
+                        on what to help.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        <strong>Ana,</strong> I’m just trying
+                        to make things easier.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        I can handle the research.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        You know what, fine.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya takes out a notebook.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        I already have some sources.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Already?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Yes.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        How?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        I read about the topic last night.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        You did the research already?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        A little.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya hands Ana her notes.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        These are really detailed.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        You actually did all this?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        I said I could handle it.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Eli becomes slightly uncomfortable.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Okay.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [He looks away.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        You judged her pretty quickly.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I didn’t judge her.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        You literally assumed she couldn’t
+                        do the work.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I was wrong. So what?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        That’s exactly what we’re supposed
+                        to be presenting about.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Silence.]
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 SCENE 3
+            ===================== -->
+
+            <section class="scene" id="scene3">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        SCENE 3
+                    </span>
+
+                    <h2>
+                        What They Didn’t Know
+                    </h2>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [After class. Maya remains behind to
+                    organize her notes. Sam enters.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Maya?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Yeah?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Can I ask you something?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Sure.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Why did you transfer?
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya pauses.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        My mother lost her job.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Oh.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        We had to move in with my grandmother
+                        for a while.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        I’m sorry.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        It’s okay.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        I didn’t know.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        You weren’t supposed to know.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Eli enters and hears the last sentence.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Maya?
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya turns.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I… heard what happened.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        It’s fine.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        No. It isn’t.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Pause.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I thought you were quiet because you
+                        thought you were better than everyone.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        And I thought you were mean because
+                        you hated me.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Maybe I was afraid of not understanding you.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Then you should have asked.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Eli looks down.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        You’re right.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Ana enters.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        What’s happening?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        We’re learning that assumptions are
+                        terrible storytellers.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        That’s actually a good line.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Because assumptions tell a story
+                        without asking the person who lived it.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Everyone becomes quiet.]
+
+                </div>
+
+
+                <div class="key-line">
+
+                    <p>
+                        “Assumptions tell a story without
+                        asking the person who lived it.”
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 SCENE 4
+            ===================== -->
+
+            <section class="scene" id="scene4">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        SCENE 4
+                    </span>
+
+                    <h2>
+                        The Presentation
+                    </h2>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The classroom is arranged for
+                    presentations. The group stands
+                    in front.]
+
+                </div>
+
+
+                <div class="projection">
+
+                    <span>
+                        Projected Image
+                    </span>
+
+                    <strong>
+                        Four silhouettes separated by walls.
+                    </strong>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        You may begin.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Our topic is equality.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        But before we define equality,
+                        we want to talk about something
+                        that often prevents it.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Judgment.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Sometimes discrimination doesn’t
+                        begin with hatred.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Pause.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Sometimes it begins with an assumption.
+                    </div>
+
+                </div>
+
+
+                <div class="projection">
+
+                    <span>
+                        Visual Transition
+                    </span>
+
+                    <strong>
+                        The walls between the silhouettes disappear.
+                    </strong>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        We assume someone is poor because
+                        of their clothes.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        We assume someone is unintelligent
+                        because they came from a different school.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        We assume someone is unfriendly
+                        because they’re quiet.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        We assume we know someone’s story
+                        because we saw one small part of it.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        But a person is always more than
+                        what we first see.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I used to think that discrimination
+                        was always obvious.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Sometimes it is.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        But sometimes it’s a small decision.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Who gets invited.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Who gets trusted.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Who gets heard.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        And who gets left behind.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The empty chair from the beginning
+                    is moved to the center of the stage.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        This chair represents the people
+                        we leave out because we think we
+                        already know who they are.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Silence.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        And what should we do when we
+                        realize we were wrong?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Listen.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Apologize.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        Change.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        And make room.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================
+                 SCENE 5
+            ===================== -->
+
+            <section class="scene" id="scene5">
+
+                <div class="scene-heading">
+
+                    <span class="scene-number">
+                        SCENE 5
+                    </span>
+
+                    <h2>
+                        The Empty Chair
+                    </h2>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The students return to their seats.
+                    The empty chair remains in the center.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Class, I want you to remember something.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [He walks toward the empty chair.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Discrimination does not always begin
+                        with someone saying, “You don’t belong.”
+                        Sometimes it begins with a thought:
+                    </div>
+
+                </div>
+
+
+                <div class="key-line">
+
+                    <p>
+                        “She probably can’t do it.”
+                    </p>
+
+                </div>
+
+
+                <div class="key-line">
+
+                    <p>
+                        “He probably doesn’t belong here.”
+                    </p>
+
+                </div>
+
+
+                <div class="key-line">
+
+                    <p>
+                        “They’re probably different from us.”
+                    </p>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        And if we never question those
+                        thoughts, they become decisions.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        And decisions become exclusion.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Exactly.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Eli stands and walks toward the empty chair.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Can I say something?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        Go ahead.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I thought I knew Maya.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [He looks at Maya.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        I didn’t.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        None of us knew everything about
+                        each other.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        But now I know that I don’t have to
+                        know someone’s whole story before
+                        I respect them.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Maya smiles slightly.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Maybe that’s the point.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        SAM CASTRO
+                    </div>
+
+                    <div class="line">
+                        We don’t need to understand everything
+                        about someone to treat them with dignity.
+                    </div>
+
+                </div>
+
+
+                <div class="projection">
+
+                    <span>
+                        Final Projection
+                    </span>
+
+                    <strong>
+                        “EVERY PERSON HAS A STORY YOU HAVE NOT HEARD YET.”
+                    </strong>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Maybe we should move it.
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ELI SAN JUAN
+                    </div>
+
+                    <div class="line">
+                        Why?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Because no one should have to sit alone.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The students move the empty chair
+                    beside the others.]
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The lighting gradually becomes brighter.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MR. CRUZ
+                    </div>
+
+                    <div class="line">
+                        A classroom becomes a community
+                        when everyone has a place in it.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Bell rings. Nobody immediately leaves.]
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        ANA FLORES
+                    </div>
+
+                    <div class="line">
+                        Ready?
+                    </div>
+
+                </div>
+
+
+                <div class="dialogue">
+
+                    <div class="speaker">
+                        MAYA GARCIA
+                    </div>
+
+                    <div class="line">
+                        Ready.
+                    </div>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [The students leave together. The stage
+                    remains empty except for the chairs,
+                    now arranged together.]
+
+                </div>
+
+
+                <div class="projection">
+
+                    <span>
+                        Final Projection
+                    </span>
+
+                    <strong>
+                        “LOOK AGAIN. LISTEN FIRST. JUDGE LESS. MAKE ROOM.”
+                    </strong>
+
+                </div>
+
+
+                <div class="stage">
+
+                    [Lights fade.]
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         END
+    ========================= -->
+
+    <section class="ending">
+
+        <h2>
+            END
+        </h2>
+
+        <p>
+            The Seat We Left Empty is an original
+            multimodal one-act play about the assumptions
+            we make, the stories we fail to hear, and
+            the importance of making room for others.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        Literary Magazine • 2026
+
+    </footer>
+
+
+</body>
+
+</html>
