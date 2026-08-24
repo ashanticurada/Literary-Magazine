@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CLVED | Literary Magazine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --navy: #223b52;
+            --navy-dark: #172c3d;
+            --navy-soft: #40596a;
+
+            --blue: #9db8ca;
+            --blue-light: #d9e5eb;
+            --blue-pale: #edf3f6;
+
+            --grey: #e5ebef;
+            --grey-dark: #8798a3;
+
+            --white: #ffffff;
+            --cream: #f7f3df;
+            --gold: #d0b849;
+            --gold-light: #eee3a9;
+
+            --text: #263b4a;
+            --text-soft: #5b6f7c;
+
+            --shadow:
+                0 20px 50px rgba(34, 59, 82, 0.12);
+
+            --serif: 'DM Serif Display', serif;
+            --sans: 'Poppins', sans-serif;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--grey);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--gold-light);
+            color: var(--navy);
+        }
+
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================= */
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #dfe7eb;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8da5b4;
+            border-radius: 20px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--navy);
+        }
+
+
+        /* =========================================================
+           SCROLL PROGRESS
+        ========================================================= */
+
+        .scroll-progress {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: rgba(255,255,255,0.08);
+
+            z-index: 1001;
+
+            pointer-events: none;
+        }
+
+        .scroll-progress-bar {
+            width: 0%;
+            height: 100%;
+
+            background: var(--gold);
+
+            box-shadow:
+                0 0 8px rgba(208,184,73,0.35);
+
+            transition:
+                width 0.08s linear;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        nav {
+            min-height: 72px;
+
+            padding: 0 6%;
+
+            background: rgba(25, 47, 64, 0.96);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 999;
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            box-shadow:
+                0 8px 25px rgba(15, 35, 49, 0.12);
+        }
+
+
+        /* NAV LOGO */
+
+        .logo {
+            color: white;
+
+            font-family: var(--serif);
+
+            font-size: 22px;
+
+            letter-spacing: 0.4px;
+
+            position: relative;
+
+            white-space: nowrap;
+        }
+
+        .logo::after {
+            content: "";
+
+            display: inline-block;
+
+            width: 6px;
+            height: 6px;
+
+            margin-left: 8px;
+
+            background: var(--gold);
+
+            border-radius: 50%;
+
+            vertical-align: middle;
+
+            box-shadow:
+                0 0 12px rgba(208,184,73,0.55);
+        }
+
+
+        /* NAV LINKS */
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .links a {
+            display: inline-block;
+
+            color: rgba(255,255,255,0.86);
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: 500;
+
+            letter-spacing: 0.3px;
+
+            padding: 9px 0;
+
+            position: relative;
+
+            transition:
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 2px;
+
+            width: 0;
+            height: 2px;
+
+            background: var(--gold);
+
+            transition: width 0.35s ease;
+        }
+
+        .links a:hover {
+            color: white;
+
+            transform: translateY(-1px);
+        }
+
+        .links a:hover::after {
+            width: 100%;
+        }
+
+        .links a.active {
+            color: var(--gold-light);
+        }
+
+        .links a.active::after {
+            width: 100%;
+        }
+
+
+        /* =========================================================
+           TOOLTIP
+        ========================================================= */
+
+        .tooltip {
+            position: absolute;
+
+            top: 46px;
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                translateY(-8px);
+
+            background: var(--cream);
+            color: var(--navy);
+
+            padding: 9px 13px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+            font-weight: 500;
+
+            letter-spacing: 0.2px;
+
+            white-space: nowrap;
+
+            opacity: 0;
+            visibility: hidden;
+
+            box-shadow:
+                0 12px 28px rgba(34,59,82,0.18);
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+
+            pointer-events: none;
+        }
+
+        .tooltip::before {
+            content: "";
+
+            position: absolute;
+
+            top: -5px;
+            left: 50%;
+
+            width: 10px;
+            height: 10px;
+
+            background: var(--cream);
+
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .page-hero {
+            min-height: 650px;
+
+            padding: 110px 10%;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(255,255,255,0.52),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    125deg,
+                    #9fbdd0 0%,
+                    #c8d8e0 42%,
+                    #e8e2b9 100%
+                );
+        }
+
+
+        /* HERO PAPER TEXTURE */
+
+        .page-hero::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+                radial-gradient(
+                    rgba(34,59,82,0.08) 1px,
+                    transparent 1px
+                );
+
+            background-size: 28px 28px;
+
+            opacity: 0.18;
+
+            pointer-events: none;
+        }
+
+
+        /* MOVING LIGHT */
+
+        .page-hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.35),
+                    transparent 68%
+                );
+
+            right: -180px;
+            top: -190px;
+
+            animation:
+                heroGlow 10s ease-in-out infinite alternate;
+
+            pointer-events: none;
+        }
+
+        @keyframes heroGlow {
+
+            0% {
+                transform: translate(0,0) scale(1);
+            }
+
+            100% {
+                transform: translate(-50px,40px) scale(1.08);
+            }
+        }
+
+
+        /* HERO CONTENT */
+
+        .hero-content {
+            max-width: 880px;
+
+            position: relative;
+            z-index: 5;
+
+            animation:
+                heroEnter 1s ease both;
+        }
+
+        @keyframes heroEnter {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .hero-small {
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            color: #536b79;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-small::before {
+            content: "";
+
+            width: 38px;
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+
+        /* HERO TITLE */
+
+        .page-hero h1 {
+            font-family: var(--serif);
+
+            font-size: clamp(70px, 10vw, 125px);
+
+            line-height: 0.86;
+
+            font-weight: 400;
+
+            letter-spacing: -2px;
+
+            color: var(--navy);
+
+            text-shadow:
+                3px 5px 0 rgba(255,255,255,0.16);
+        }
+
+        .page-hero h1 em {
+            color: #526d7e;
+
+            font-style: italic;
+
+            position: relative;
+        }
+
+        .page-hero h1 em::after {
+            content: "";
+
+            position: absolute;
+
+            left: 3px;
+            right: 5px;
+            bottom: -8px;
+
+            height: 2px;
+
+            background: var(--gold);
+
+            opacity: 0.75;
+        }
+
+
+        /* CROSS */
+
+        .clved-title {
+            position: relative;
+        }
+
+        .cross {
+            display: inline-block;
+
+            font-family: var(--serif);
+
+            font-size: 60px;
+
+            color: var(--gold);
+
+            margin-left: 15px;
+
+            vertical-align: middle;
+
+            transform: translateY(-8px);
+
+            text-shadow:
+                2px 3px 0 rgba(34,59,82,0.08);
+
+            animation:
+                floatingCross 4s ease-in-out infinite;
+        }
+
+        @keyframes floatingCross {
+
+            0%,
+            100% {
+                transform:
+                    translateY(-8px)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-17px)
+                    rotate(-3deg);
+            }
+        }
+
+
+        /* HERO RULE */
+
+        .hero-rule {
+            width: 190px;
+            height: 3px;
+
+            margin: 38px 0 28px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    var(--gold),
+                    rgba(208,184,73,0.1)
+                );
+
+            position: relative;
+        }
+
+        .hero-rule::after {
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+            top: -3px;
+
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: var(--gold);
+
+            box-shadow:
+                0 0 15px rgba(208,184,73,0.5);
+        }
+
+
+        .hero-description {
+            max-width: 680px;
+
+            font-size: 15px;
+
+            font-weight: 300;
+
+            line-height: 1.9;
+
+            color: #405967;
+        }
+
+
+        /* =========================================================
+           HERO DECORATIVE CIRCLES
+        ========================================================= */
+
+        .shape-one {
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            border: 1px solid rgba(34,59,82,0.18);
+
+            border-radius: 50%;
+
+            right: 5%;
+            top: 14%;
+
+            animation:
+                slowRotate 18s linear infinite;
+        }
+
+        .shape-one::before,
+        .shape-one::after {
+            content: "";
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(34,59,82,0.10);
+        }
+
+        .shape-one::before {
+            inset: 30px;
+        }
+
+        .shape-one::after {
+            inset: 65px;
+        }
+
+
+        .shape-two {
+            position: absolute;
+
+            width: 235px;
+            height: 235px;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    rgba(255,255,255,0.65),
+                    rgba(255,255,255,0.08)
+                );
+
+            border-radius: 50%;
+
+            right: 13%;
+            top: 28%;
+
+            box-shadow:
+                inset -20px -20px 50px rgba(34,59,82,0.04);
+
+            animation:
+                floatingShape 7s ease-in-out infinite;
+        }
+
+        @keyframes slowRotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes floatingShape {
+
+            0%,
+            100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(-20px,20px);
+            }
+        }
+
+
+        /* CLOUD-LIKE FLOATING PIECES */
+
+        .cloud {
+            position: absolute;
+
+            background: rgba(255,255,255,0.24);
+
+            border-radius: 100px;
+
+            filter: blur(1px);
+
+            pointer-events: none;
+        }
+
+        .cloud.one {
+            width: 210px;
+            height: 65px;
+
+            right: 4%;
+            bottom: 13%;
+
+            animation:
+                cloudMove 9s ease-in-out infinite;
+        }
+
+        .cloud.two {
+            width: 150px;
+            height: 48px;
+
+            right: 27%;
+            top: 17%;
+
+            opacity: 0.6;
+
+            animation:
+                cloudMove 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes cloudMove {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(30px);
+            }
+        }
+
+
+        /* =========================================================
+           INTRO
+        ========================================================= */
+
+        .intro {
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            padding: 115px 35px;
+        }
+
+        .intro-layout {
+            display: grid;
+
+            grid-template-columns: 210px 1fr;
+
+            gap: 70px;
+        }
+
+        .intro-label {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            color: #738692;
+
+            padding-top: 13px;
+
+            font-weight: 600;
+
+            position: relative;
+        }
+
+        .intro-label::after {
+            content: "";
+
+            display: block;
+
+            width: 35px;
+            height: 2px;
+
+            margin-top: 14px;
+
+            background: var(--gold);
+        }
+
+
+        .intro-content {
+            position: relative;
+        }
+
+        .intro-content::before {
+            content: "“";
+
+            position: absolute;
+
+            right: 0;
+            top: -60px;
+
+            font-family: var(--serif);
+
+            font-size: 150px;
+
+            line-height: 1;
+
+            color: rgba(34,59,82,0.05);
+        }
+
+        .intro-content h2 {
+            font-family: var(--serif);
+
+            font-size: clamp(42px, 5vw, 62px);
+
+            font-weight: 400;
+
+            color: var(--navy);
+
+            line-height: 1.04;
+
+            max-width: 700px;
+
+            margin-bottom: 32px;
+        }
+
+        .intro-content h2 span {
+            color: #657f8f;
+        }
+
+        .intro-content p {
+            color: var(--text-soft);
+
+            line-height: 2;
+
+            max-width: 760px;
+
+            font-size: 14px;
+
+            font-weight: 300;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* INTRO MINI DIVIDER */
+
+        .intro-divider {
+            width: 100%;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    #c8d3d9,
+                    transparent
+                );
+
+            margin-top: 42px;
+        }
+
+
+        /* =========================================================
+           REFLECTION SECTION
+        ========================================================= */
+
+        .reflection-section {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafb 0%,
+                    #edf3f5 45%,
+                    #dce7ec 100%
+                );
+
+            padding: 125px 7%;
+
+            border-top: 1px solid #c9d4da;
+            border-bottom: 1px solid #c9d4da;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* BACKGROUND GRID */
+
+        .reflection-section::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(34,59,82,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(34,59,82,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            pointer-events: none;
+        }
+
+
+        /* GIANT CIRCLE */
+
+        .reflection-section::after {
+            content: "";
+
+            position: absolute;
+
+            width: 700px;
+            height: 700px;
+
+            border: 1px solid rgba(34,59,82,0.07);
+
+            border-radius: 50%;
+
+            right: -380px;
+            top: 100px;
+
+            animation:
+                slowRotate 30s linear infinite;
+        }
+
+
+        .section-marker {
+            position: absolute;
+
+            right: 4.5%;
+            top: 135px;
+
+            font-family: var(--serif);
+
+            font-size: 14px;
+
+            font-style: italic;
+
+            color: #84949e;
+
+            writing-mode: vertical-rl;
+
+            letter-spacing: 3px;
+
+            opacity: 0.7;
+        }
+
+
+        /* =========================================================
+           REFLECTION HEADING
+        ========================================================= */
+
+        .reflection-heading {
+            max-width: 900px;
+
+            margin:
+                0 auto
+                75px;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .reflection-heading small {
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            color: #718692;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .reflection-heading small::before {
+            content: "";
+
+            width: 32px;
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+        .reflection-heading h2 {
+            font-family: var(--serif);
+
+            font-size: clamp(52px, 7vw, 82px);
+
+            font-weight: 400;
+
+            color: var(--navy);
+
+            line-height: 0.98;
+
+            margin: 20px 0 25px;
+
+            letter-spacing: -1px;
+        }
+
+        .reflection-heading p {
+            max-width: 680px;
+
+            color: #5d717e;
+
+            line-height: 1.9;
+
+            font-size: 14px;
+
+            font-weight: 300;
+        }
+
+
+        /* =========================================================
+           REFLECTION LIST
+        ========================================================= */
+
+        .reflection-list {
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 28px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .reflection-card {
+            display: grid;
+
+            grid-template-columns: 175px 1fr;
+
+            min-height: 255px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(255,255,255,0.97),
+                    rgba(249,251,252,0.92)
+                );
+
+            border: 1px solid #c6d1d7;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 20px rgba(34,59,82,0.035);
+
+            transition:
+                transform 0.45s ease,
+                box-shadow 0.45s ease,
+                border-color 0.45s ease;
+        }
+
+
+        /* CARD TOP LINE */
+
+        .reflection-card::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 5px;
+            height: 80px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--gold),
+                    rgba(208,184,73,0)
+                );
+
+            transition:
+                height 0.45s ease;
+        }
+
+
+        /* CARD CIRCLE */
+
+        .reflection-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(241,230,174,0.35),
+                    rgba(241,230,174,0)
+                );
+
+            right: -85px;
+            bottom: -105px;
+
+            transition:
+                transform 0.6s ease;
+        }
+
+        .reflection-card:hover {
+            transform: translateY(-7px);
+
+            border-color: #b7c7d0;
+
+            box-shadow:
+                0 24px 45px rgba(34,59,82,0.13);
+        }
+
+        .reflection-card:hover::before {
+            height: 140px;
+        }
+
+        .reflection-card:hover::after {
+            transform: scale(1.35);
+        }
+
+
+        /* EVEN CARDS */
+
+        .reflection-card:nth-child(even) {
+            grid-template-columns: 1fr 175px;
+        }
+
+        .reflection-card:nth-child(even) .reflection-number {
+            order: 2;
+
+            border-right: none;
+
+            border-left: 1px solid #c6d1d7;
+        }
+
+        .reflection-card:nth-child(even)::before {
+            left: auto;
+            right: 0;
+        }
+
+        .reflection-card:nth-child(even)::after {
+            right: auto;
+            left: -85px;
+        }
+
+
+        /* =========================================================
+           NUMBER PANEL
+        ========================================================= */
+
+        .reflection-number {
+            background:
+                linear-gradient(
+                    145deg,
+                    #dbe5ea,
+                    #c6d7df
+                );
+
+            border-right: 1px solid #c6d1d7;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            position: relative;
+
+            z-index: 4;
+
+            overflow: hidden;
+        }
+
+        .reflection-number::before {
+            content: "";
+
+            position: absolute;
+
+            width: 125px;
+            height: 125px;
+
+            border: 1px solid rgba(34,59,82,0.12);
+
+            border-radius: 50%;
+
+            transition:
+                transform 0.5s ease;
+        }
+
+        .reflection-number::after {
+            content: "";
+
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+
+            border: 1px dashed rgba(34,59,82,0.08);
+
+            border-radius: 50%;
+
+            transition:
+                transform 0.7s ease;
+        }
+
+        .reflection-card:hover .reflection-number::before {
+            transform: scale(1.15);
+        }
+
+        .reflection-card:hover .reflection-number::after {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .reflection-number span {
+            font-family: var(--serif);
+
+            font-size: 68px;
+
+            line-height: 1;
+
+            color: #536d7d;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .reflection-number small {
+            margin-top: 11px;
+
+            font-size: 8px;
+
+            letter-spacing: 4px;
+
+            color: #647b88;
+
+            font-weight: 600;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+
+        /* =========================================================
+           CARD CONTENT
+        ========================================================= */
+
+        .reflection-content {
+            padding: 45px 52px;
+
+            position: relative;
+
+            z-index: 6;
+        }
+
+        .reflection-content .value-label {
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            color: #8a9aa4;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            margin-bottom: 11px;
+        }
+
+        .reflection-content h3 {
+            font-family: var(--serif);
+
+            font-size: 40px;
+
+            font-weight: 400;
+
+            color: var(--navy);
+
+            line-height: 1.05;
+
+            margin-bottom: 19px;
+
+            position: relative;
+        }
+
+        .reflection-content h3::after {
+            content: "";
+
+            display: block;
+
+            width: 50px;
+            height: 2px;
+
+            background: var(--gold);
+
+            margin-top: 14px;
+
+            transition:
+                width 0.4s ease;
+        }
+
+        .reflection-card:hover .reflection-content h3::after {
+            width: 95px;
+        }
+
+        .reflection-content p {
+            font-size: 13.5px;
+
+            line-height: 2;
+
+            color: #566c7a;
+
+            font-weight: 300;
+
+            max-width: 850px;
+        }
+
+        .reflection-content em {
+            color: #344f61;
+
+            font-weight: 400;
+        }
+
+
+        /* =========================================================
+           QUOTE MARK ON CARDS
+        ========================================================= */
+
+        .reflection-content p::first-letter {
+            font-size: 17px;
+        }
+
+
+        /* =========================================================
+           CLOSING
+        ========================================================= */
+
+        .closing {
+            padding: 135px 10%;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(255,255,255,0.6),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    120deg,
+                    #d4e0e7,
+                    #e6edf0 55%,
+                    #f1e6ae
+                );
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* CLOSING RINGS */
+
+        .closing::before {
+            content: "";
+
+            position: absolute;
+
+            width: 520px;
+            height: 520px;
+
+            border: 1px solid rgba(34,59,82,0.10);
+
+            border-radius: 50%;
+
+            left: -260px;
+            top: 30px;
+        }
+
+        .closing::after {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            border: 1px solid rgba(34,59,82,0.08);
+
+            border-radius: 50%;
+
+            right: -210px;
+            bottom: -120px;
+
+            animation:
+                slowRotate 25s linear infinite reverse;
+        }
+
+
+        .closing-label {
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            color: #718692;
+
+            font-weight: 600;
+
+            position: relative;
+
+            z-index: 4;
+        }
+
+        .closing-label::before,
+        .closing-label::after {
+            content: "";
+
+            display: inline-block;
+
+            width: 28px;
+            height: 1px;
+
+            background: var(--gold);
+
+            vertical-align: middle;
+
+            margin: 0 10px;
+        }
+
+
+        .closing h2 {
+            max-width: 850px;
+
+            margin: 22px auto 25px;
+
+            font-family: var(--serif);
+
+            font-size: clamp(45px, 6vw, 72px);
+
+            font-weight: 400;
+
+            color: var(--navy);
+
+            line-height: 1.08;
+
+            position: relative;
+
+            z-index: 4;
+        }
+
+        .closing p {
+            max-width: 680px;
+
+            margin: auto;
+
+            font-size: 14px;
+
+            line-height: 1.95;
+
+            color: #566c7a;
+
+            font-weight: 300;
+
+            position: relative;
+
+            z-index: 4;
+        }
+
+
+        /* =========================================================
+           CROSS DECORATION
+        ========================================================= */
+
+        .cross-decoration {
+            margin: 50px auto 0;
+
+            width: 60px;
+            height: 76px;
+
+            position: relative;
+
+            opacity: 0.82;
+
+            animation:
+                gentleFloat 4s ease-in-out infinite;
+        }
+
+        .cross-decoration::before {
+            content: "";
+
+            position: absolute;
+
+            width: 8px;
+            height: 70px;
+
+            background: var(--gold);
+
+            left: 50%;
+            top: 0;
+
+            transform: translateX(-50%);
+
+            border-radius: 2px;
+
+            box-shadow:
+                0 0 20px rgba(208,184,73,0.2);
+        }
+
+        .cross-decoration::after {
+            content: "";
+
+            position: absolute;
+
+            width: 48px;
+            height: 8px;
+
+            background: var(--gold);
+
+            left: 50%;
+            top: 19px;
+
+            transform: translateX(-50%);
+
+            border-radius: 2px;
+        }
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+
+        /* =========================================================
+           FINAL MESSAGE
+        ========================================================= */
+
+        .final-message {
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(155,184,202,0.13),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(241,230,174,0.09),
+                    transparent 25%
+                ),
+
+                var(--navy-dark);
+
+            color: white;
+
+            padding: 115px 30px;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .final-message::before {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            border-radius: 50%;
+
+            left: -170px;
+            top: -150px;
+
+            animation:
+                slowRotate 24s linear infinite;
+        }
+
+        .final-message::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border: 1px solid rgba(241,230,174,0.08);
+
+            border-radius: 50%;
+
+            right: -150px;
+            bottom: -160px;
+        }
+
+        .final-message h2 {
+            font-family: var(--serif);
+
+            font-size: clamp(45px, 6vw, 65px);
+
+            font-weight: 400;
+
+            margin-bottom: 22px;
+
+            position: relative;
+
+            z-index: 3;
+
+            color: white;
+        }
+
+        .final-message h2::after {
+            content: "";
+
+            display: block;
+
+            width: 65px;
+            height: 2px;
+
+            background: var(--gold);
+
+            margin: 20px auto 0;
+        }
+
+        .final-message p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #c8d4db;
+
+            line-height: 1.9;
+
+            font-size: 14px;
+
+            font-weight: 300;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            background: #122434;
+
+            color: #8fa0aa;
+
+            text-align: center;
+
+            padding: 28px 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            position: relative;
+        }
+
+        footer::before {
+            content: "✦";
+
+            color: var(--gold);
+
+            margin-right: 8px;
+        }
+
+        footer::after {
+            content: "✦";
+
+            color: var(--gold);
+
+            margin-left: 8px;
+        }
+
+
+        /* =========================================================
+           ORIGINAL FADE-IN
+        ========================================================= */
+
+        .intro,
+        .reflection-heading,
+        .reflection-card,
+        .closing,
+        .final-message {
+            animation:
+                fadeUp 0.9s ease both;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        .scroll-reveal {
+            opacity: 0;
+
+            transform: translateY(28px);
+
+            transition:
+                opacity 0.9s ease,
+                transform 0.9s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* SLIGHT STAGGER FOR CARDS */
+
+        .reflection-card.scroll-reveal:nth-child(2) {
+            transition-delay: 0.08s;
+        }
+
+        .reflection-card.scroll-reveal:nth-child(3) {
+            transition-delay: 0.12s;
+        }
+
+        .reflection-card.scroll-reveal:nth-child(4) {
+            transition-delay: 0.16s;
+        }
+
+        .reflection-card.scroll-reveal:nth-child(5) {
+            transition-delay: 0.20s;
+        }
+
+        .reflection-card.scroll-reveal:nth-child(6) {
+            transition-delay: 0.24s;
+        }
+
+        .reflection-card.scroll-reveal:nth-child(7) {
+            transition-delay: 0.28s;
+        }
+
+
+        /* =========================================================
+           FOCUS
+        ========================================================= */
+
+        a:focus-visible {
+            outline: 2px solid var(--gold);
+
+            outline-offset: 5px;
+
+            border-radius: 3px;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 16px 22px;
+
+                flex-direction: column;
+
+                gap: 13px;
+            }
+
+            .links {
+                gap: 18px;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .tooltip {
+                display: none;
+            }
+
+            .page-hero {
+                min-height: 620px;
+
+                padding: 90px 28px;
+            }
+
+            .page-hero h1 {
+                font-size: clamp(65px, 17vw, 105px);
+            }
+
+            .cross {
+                font-size: 45px;
+
+                margin-left: 8px;
+            }
+
+            .shape-one {
+                width: 300px;
+                height: 300px;
+
+                right: -120px;
+                top: 30%;
+            }
+
+            .shape-two {
+                width: 180px;
+                height: 180px;
+
+                right: -30px;
+                top: 42%;
+            }
+
+            .cloud {
+                opacity: 0.45;
+            }
+
+            .intro {
+                padding: 85px 25px;
+            }
+
+            .intro-layout {
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+            .intro-content h2 {
+                font-size: 45px;
+            }
+
+            .reflection-section {
+                padding: 90px 18px;
+            }
+
+            .reflection-heading {
+                margin-bottom: 55px;
+            }
+
+            .reflection-heading h2 {
+                font-size: 52px;
+            }
+
+            .section-marker {
+                display: none;
+            }
+
+            .reflection-card,
+            .reflection-card:nth-child(even) {
+                grid-template-columns: 78px 1fr;
+            }
+
+            .reflection-card:nth-child(even) .reflection-number {
+                order: initial;
+
+                border-left: none;
+
+                border-right: 1px solid #c6d1d7;
+            }
+
+            .reflection-number span {
+                font-size: 42px;
+            }
+
+            .reflection-number small {
+                font-size: 7px;
+
+                letter-spacing: 2px;
+            }
+
+            .reflection-content {
+                padding: 32px 23px;
+            }
+
+            .reflection-content h3 {
+                font-size: 30px;
+            }
+
+            .reflection-content p {
+                font-size: 13px;
+
+                line-height: 1.9;
+            }
+
+            .closing {
+                padding: 95px 25px;
+            }
+
+            .closing h2 {
+                font-size: 45px;
+            }
+
+            .final-message {
+                padding: 90px 25px;
+            }
+
+            .final-message h2 {
+                font-size: 43px;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 500px) {
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .links {
+                gap: 12px;
+            }
+
+            .links a {
+                font-size: 10px;
+            }
+
+            .page-hero {
+                min-height: 590px;
+            }
+
+            .page-hero h1 {
+                font-size: 64px;
+
+                letter-spacing: -1px;
+            }
+
+            .hero-small {
+                font-size: 9px;
+
+                letter-spacing: 2.5px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .intro-content h2 {
+                font-size: 39px;
+            }
+
+            .reflection-heading h2 {
+                font-size: 45px;
+            }
+
+            .reflection-card,
+            .reflection-card:nth-child(even) {
+                grid-template-columns: 65px 1fr;
+            }
+
+            .reflection-content {
+                padding: 28px 18px;
+            }
+
+            .reflection-content h3 {
+                font-size: 27px;
+            }
+
+            .reflection-content p {
+                font-size: 12.5px;
+            }
+
+            .reflection-number span {
+                font-size: 34px;
+            }
+
+            .closing h2 {
+                font-size: 39px;
+            }
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .scroll-reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .scroll-progress-bar {
+                transition: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         SCROLL PROGRESS
+    ========================================================= -->
+
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
+
+    <nav>
+
+        <div class="logo">
+            Literary Magazine
+        </div>
+
+        <div class="links">
+
+            <div class="nav-item">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <span class="tooltip">
+                    Welcome Page
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="english.html">
+                    English
+                </a>
+
+                <span class="tooltip">
+                    Original Multimodal One-Act Play
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="clved.html" class="active">
+                    CLVED
+                </a>
+
+                <span class="tooltip">
+                    Christian Reflection
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="filipino.html">
+                    Filipino
+                </a>
+
+                <span class="tooltip">
+                    Literary Analysis
+                </span>
+
+            </div>
+
+
+            <div class="nav-item">
+
+                <a href="references.html">
+                    References
+                </a>
+
+                <span class="tooltip">
+                    Sources & Acknowledgments
+                </span>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="page-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                Christian Living and Values Education
+            </div>
+
+            <h1 class="clved-title">
+
+                Christian
+                <span class="cross">✝</span>
+
+                <br>
+
+                <em>Reflection</em>
+
+            </h1>
+
+            <div class="hero-rule"></div>
+
+            <p class="hero-description">
+
+                A reflection on human dignity, conscience,
+                freedom, forgiveness, compassion, moral
+                transformation, and faithful Christian living
+                through the meaningful experiences shown
+                in our literary work.
+
+            </p>
+
+        </div>
+
+
+        <div class="shape-one"></div>
+
+        <div class="shape-two"></div>
+
+        <div class="cloud one"></div>
+
+        <div class="cloud two"></div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         INTRODUCTION
+    ========================================================= -->
+
+    <section class="intro">
+
+        <div class="intro-layout">
+
+            <div class="intro-label">
+                CLVED REFLECTION
+            </div>
+
+            <div class="intro-content">
+
+                <h2>
+                    Seeing human dignity
+                    through <span>stories.</span>
+                </h2>
+
+                <p>
+
+                    Literature allows us to look beyond the
+                    events of a story and reflect on the values
+                    that guide our actions. Through our featured
+                    literary work, we are encouraged to examine
+                    how people treat one another and how
+                    prejudice, silence, and unfair judgment can
+                    affect a person's dignity.
+
+                </p>
+
+                <p>
+
+                    The story also reminds us that Christian
+                    values are not only ideas we learn in class.
+                    They are values that should guide the way we
+                    listen, understand, forgive, show
+                    compassion, and stand up for what is right.
+
+                </p>
+
+                <div class="intro-divider"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         SEVEN VALUES
+    ========================================================= -->
+
+    <section class="reflection-section">
+
+        <div class="section-marker">
+            VALUES • REFLECTION • ACTION
+        </div>
+
+
+        <div class="reflection-heading">
+
+            <small>
+                SEVEN VALUES
+            </small>
+
+            <h2>
+                A Reflection on
+                What We Believe.
+            </h2>
+
+            <p>
+
+                Each reflection connects the literary work
+                with Christian teachings and encourages us
+                to recognize our responsibility toward
+                ourselves, others, and our community.
+
+            </p>
+
+        </div>
+
+
+        <div class="reflection-list">
+
+
+            <!-- =================================================
+                 01
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>01</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        First Reflection
+                    </div>
+
+                    <h3>
+                        Human Dignity
+                    </h3>
+
+                    <p>
+
+                        In <em>Dekada '70</em> and in
+                        <em>The Seat We Left Empty</em>,
+                        human dignity is shown through the
+                        way people are affected when their
+                        worth is ignored or violated. In
+                        <em>Dekada '70</em>, Martial Law
+                        exposed how oppression and fear
+                        could affect the lives and freedoms
+                        of ordinary Filipino families. In
+                        our one-act play, Maya experiences
+                        a different form of injustice when
+                        others judge her based on her
+                        appearance and background. Both
+                        works remind us that every person
+                        has inherent worth because every
+                        human being is created in the image
+                        and likeness of God. Respecting
+                        another person means recognizing
+                        their value even before knowing
+                        their entire story.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 02
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>02</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Second Reflection
+                    </div>
+
+                    <h3>
+                        Conscience
+                    </h3>
+
+                    <p>
+
+                        Conscience helps people recognize
+                        whether their choices are right or
+                        wrong. In <em>Dekada '70</em>, the
+                        characters are confronted with a
+                        society filled with fear, oppression,
+                        and injustice. Their experiences
+                        challenge them to question whether
+                        remaining silent is truly the right
+                        thing to do. In <em>The Seat We Left
+                        Empty</em>, Eli's conscience changes
+                        when he realizes that he judged Maya
+                        without knowing her story. Instead
+                        of ignoring his mistake, he admits
+                        that he was wrong. Both works show
+                        that conscience can encourage us to
+                        recognize injustice, correct our
+                        actions, and choose what is right.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 03
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>03</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Third Reflection
+                    </div>
+
+                    <h3>
+                        Freedom and Responsibility
+                    </h3>
+
+                    <p>
+
+                        Freedom gives people the ability to
+                        make choices, but every choice also
+                        carries responsibility. In
+                        <em>Dekada '70</em>, the characters
+                        experience a time when freedom is
+                        heavily restricted, forcing them to
+                        think about what they can do in the
+                        face of oppression. In our one-act
+                        play, the students have the freedom
+                        to decide how they treat Maya, but
+                        they must also accept the consequences
+                        of their choices. The story reminds us
+                        that freedom should not be used to
+                        hurt, exclude, or judge others.
+                        Instead, it should be guided by
+                        responsibility, respect, and the
+                        common good.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 04
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>04</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Fourth Reflection
+                    </div>
+
+                    <h3>
+                        Forgiveness
+                    </h3>
+
+                    <p>
+
+                        Forgiveness does not mean pretending
+                        that something painful never happened.
+                        It means choosing not to remain trapped
+                        by anger and resentment. In
+                        <em>The Seat We Left Empty</em>, Maya
+                        could have continued holding Eli's
+                        judgment against him. Instead, the
+                        characters choose to acknowledge what
+                        happened and learn from it. Eli also
+                        accepts his mistake instead of making
+                        excuses for his actions. This reflects
+                        the Christian call to forgive others
+                        while recognizing that forgiveness
+                        should also lead to change. Through
+                        forgiveness, people can begin rebuilding
+                        trust and creating healthier
+                        relationships.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 05
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>05</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Fifth Reflection
+                    </div>
+
+                    <h3>
+                        Compassion
+                    </h3>
+
+                    <p>
+
+                        Compassion means being willing to
+                        understand another person's situation
+                        and respond with care. In
+                        <em>Dekada '70</em>, the experiences
+                        of the family reveal how difficult
+                        circumstances can deepen their concern
+                        for one another. In <em>The Seat We
+                        Left Empty</em>, Ana demonstrates
+                        compassion when she chooses to welcome
+                        Maya instead of judging her. Sam also
+                        becomes more understanding after
+                        learning about Maya's situation.
+                        These moments remind us that we do not
+                        always know what another person is
+                        experiencing. A compassionate Christian
+                        chooses to listen first and respond
+                        with kindness rather than immediately
+                        judging others.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 06
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>06</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Sixth Reflection
+                    </div>
+
+                    <h3>
+                        Moral Transformation
+                    </h3>
+
+                    <p>
+
+                        Moral transformation happens when a
+                        person recognizes what needs to change
+                        and chooses to become better. In
+                        <em>Dekada '70</em>, the characters
+                        experience changes in how they
+                        understand oppression, family, and
+                        responsibility. In <em>The Seat We
+                        Left Empty</em>, Eli experiences a
+                        personal transformation after realizing
+                        that his assumptions caused Maya to
+                        feel excluded. He does not simply admit
+                        that he was wrong; he learns that
+                        respecting others requires him to
+                        question his own assumptions. This
+                        shows that transformation begins with
+                        self-awareness and becomes meaningful
+                        when it leads to better actions.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 07
+            ================================================== -->
+
+            <article class="reflection-card">
+
+                <div class="reflection-number">
+
+                    <span>07</span>
+
+                    <small>
+                        VALUE
+                    </small>
+
+                </div>
+
+
+                <div class="reflection-content">
+
+                    <div class="value-label">
+                        Seventh Reflection
+                    </div>
+
+                    <h3>
+                        Faithful Christian Living
+                    </h3>
+
+                    <p>
+
+                        Both <em>Dekada '70</em> and
+                        <em>The Seat We Left Empty</em>
+                        remind us that Christian living is
+                        reflected in the choices we make every
+                        day. Faith is not only expressed through
+                        words or prayer but also through how we
+                        treat people who may be different from
+                        us. We are called to protect human
+                        dignity, listen to our conscience,
+                        use freedom responsibly, forgive,
+                        show compassion, and stand against
+                        injustice. The stories encourage us to
+                        become people who do not simply notice
+                        unfairness but choose to respond with
+                        courage, kindness, and responsibility.
+                        By living these values, we can help
+                        create a community where every person
+                        feels respected, heard, and included.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CLOSING REFLECTION
+    ========================================================= -->
+
+    <section class="closing">
+
+        <div class="closing-label">
+            OUR TAKEAWAY
+        </div>
+
+        <h2>
+            Every person deserves
+            to be seen, heard, and respected.
+        </h2>
+
+        <p>
+
+            The stories we explored remind us that
+            meaningful change can begin with something
+            simple: choosing to listen before judging.
+            As Christians, we are called to recognize
+            the dignity of every person and allow our
+            faith to guide the way we treat others.
+
+        </p>
+
+
+        <div class="cross-decoration"></div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FINAL MESSAGE
+    ========================================================= -->
+
+    <section class="final-message">
+
+        <h2>
+            Believe. Reflect. Live.
+        </h2>
+
+        <p>
+
+            May these stories encourage us to become
+            more compassionate, responsible, and
+            courageous in the way we live out our
+            Christian values.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        Literary Magazine • 2026
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         SCROLL EFFECT SCRIPT
+    ========================================================= -->
+
+    <script>
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        const revealElements = document.querySelectorAll(
+            '.intro, .reflection-heading, .reflection-card, .closing, .final-message'
+        );
+
+        revealElements.forEach(element => {
+            element.classList.add('scroll-reveal');
+        });
+
+
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add('visible');
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+
+                rootMargin:
+                    '0px 0px -40px 0px'
+            }
+        );
+
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+
+
+        /* =========================================================
+           SCROLL PROGRESS
+        ========================================================= */
+
+        const progressBar =
+            document.querySelector('.scroll-progress-bar');
+
+
+        function updateScrollProgress() {
+
+            const scrollTop =
+                window.scrollY;
+
+
+            const documentHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            const progress =
+                documentHeight > 0
+                    ? (scrollTop / documentHeight) * 100
+                    : 0;
+
+
+            progressBar.style.width =
+                `${progress}%`;
+        }
+
+
+        window.addEventListener(
+            'scroll',
+            updateScrollProgress,
+            { passive: true }
+        );
+
+
+        window.addEventListener(
+            'resize',
+            updateScrollProgress
+        );
+
+
+        updateScrollProgress();
+
+    </script>
+
+
+</body>
+
+</html>
